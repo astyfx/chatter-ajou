@@ -89,6 +89,6 @@ def home():
 @login_required
 def send_message():
     if request.method == 'POST':
-        pi['test_channel'].trigger('my-event', {'message': 'hello world'})
+        pi['test_channel'].trigger('test_event', {'message': 'hello world'})
 
         return jsonify(message=u"message")

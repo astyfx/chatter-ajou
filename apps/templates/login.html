@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+    <div class="contentBody">
+        <div class="adminLogin">
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8">
+                    <form class="form-signin" role="form" method="post">
+                        <h2 class="form-signin-heading">관리자 로그인</h2>
+                        <input type="text" name="username" class="form-control" placeholder="아이디" required="" autofocus="">
+                        <input type="password" name="password" class="form-control" placeholder="비밀번호" required="">
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+                    </form>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

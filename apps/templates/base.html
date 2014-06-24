@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <title>CHATTER AJOU</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='summernote/dist/summernote.css') }}">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% block favicon %}
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"/>
+    {% endblock %}
+</head>
+<body>
+{% block layout %}{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}
+</body>
+</html>

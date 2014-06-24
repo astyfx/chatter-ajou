@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from google.appengine.ext import ndb
 
-from flask import request, render_template, flash, url_for, redirect, g, session
+from flask import request, render_template, flash, url_for, redirect, g, session, jsonify
 from werkzeug.security import generate_password_hash
 
-from apps import app
+from apps import app, pi
 from apps.models import User
 from core import utils
 from decorators import login_required, admin_required
@@ -21,6 +21,32 @@ def load_user():
 
     g.user = user
     g.is_superuser = True if session.get('is_superuser') else False
+
+
+def join():
+    if request.method == 'GET':
+        return render_template('join.html')
+
+    if request.method == 'POST':
+        user_exist = None
+
+        user_exist = User.query(User.username == request.form['username']).get()
+        print user_exist
+
+        user = User(
+            username=request.form['username'], password=generate_password_hash(request.form['password']), email=request.form['email']
+        )
+        exist = False
+
+        if not user_exist:
+            user_create_result = user.put()
+            logging.info(user_create_result)
+
+            flash(u'회원가입을 하였습니다.', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash(u'중복되는 아이디가 존재합니다.', 'danger')
+            return redirect(url_for('join'))
 
 
 def login():
@@ -55,5 +81,14 @@ def logout():
     return redirect(url_for('home'))
 
 
+@login_required
 def home():
     return render_template('home.html')
+
+
+@login_required
+def send_message():
+    if request.method == 'POST':
+        pi['test_channel'].trigger('my-event', {'message': 'hello world'})
+
+        return jsonify(message=u"message")
